@@ -42,57 +42,17 @@ int** getAdjacencyMatrix() {
         matrix[i] = new int[MATRIX_SIZE];
     }
 
-    matrix[0][0] = 110;
-    matrix[0][1] = 110;
-    matrix[0][2] = 110;
-    matrix[0][3] = 1;
-    matrix[0][4] = 110;
-
-    matrix[1][0] = 1;
-    matrix[1][1] = 110;
-    matrix[1][2] = 1;
-    matrix[1][3] = 110;
-    matrix[1][4] = 1;
-
-    matrix[2][0] = 1;
-    matrix[2][1] = 110;
-    matrix[2][2] = 110;
-    matrix[2][3] = 110;
-    matrix[2][4] = 1;
-
-    matrix[3][0] = 110;
-    matrix[3][1] = 110;
-    matrix[3][2] = 110;
-    matrix[3][3] = 110;
-    matrix[3][4] = 1;
-
-    matrix[4][0] = 110;
-    matrix[4][1] = 110;
-    matrix[4][2] = 110;
-    matrix[4][3] = 110;
-    matrix[4][4] = 110;
-
-    return matrix;
-}
-
-int** getWeightMatrix() {
-    
-    int** matrix = new int*[MATRIX_SIZE];
-    for (int i = 0; i < MATRIX_SIZE; i++) {
-        matrix[i] = new int[MATRIX_SIZE];
-    }
-
     matrix[0][0] = 0;
     matrix[0][1] = 0;
     matrix[0][2] = 0;
-    matrix[0][3] = 3;
+    matrix[0][3] = 1;
     matrix[0][4] = 0;
 
-    matrix[1][0] = 3;
+    matrix[1][0] = 1;
     matrix[1][1] = 0;
     matrix[1][2] = 1;
     matrix[1][3] = 0;
-    matrix[1][4] = 3;
+    matrix[1][4] = 1;
 
     matrix[2][0] = 1;
     matrix[2][1] = 0;
@@ -104,13 +64,53 @@ int** getWeightMatrix() {
     matrix[3][1] = 0;
     matrix[3][2] = 0;
     matrix[3][3] = 0;
-    matrix[3][4] = 3;
+    matrix[3][4] = 1;
 
     matrix[4][0] = 0;
     matrix[4][1] = 0;
     matrix[4][2] = 0;
     matrix[4][3] = 0;
     matrix[4][4] = 0;
+
+    return matrix;
+}
+
+int** getWeightMatrix() {
+    
+    int** matrix = new int*[MATRIX_SIZE];
+    for (int i = 0; i < MATRIX_SIZE; i++) {
+        matrix[i] = new int[MATRIX_SIZE];
+    }
+
+    matrix[0][0] = 10;
+    matrix[0][1] = 10;
+    matrix[0][2] = 10;
+    matrix[0][3] = 3;
+    matrix[0][4] = 10;
+
+    matrix[1][0] = 3;
+    matrix[1][1] = 10;
+    matrix[1][2] = 1;
+    matrix[1][3] = 10;
+    matrix[1][4] = 3;
+
+    matrix[2][0] = 1;
+    matrix[2][1] = 10;
+    matrix[2][2] = 10;
+    matrix[2][3] = 10;
+    matrix[2][4] = 1;
+
+    matrix[3][0] = 10;
+    matrix[3][1] = 10;
+    matrix[3][2] = 10;
+    matrix[3][3] = 10;
+    matrix[3][4] = 3;
+
+    matrix[4][0] = 10;
+    matrix[4][1] = 10;
+    matrix[4][2] = 10;
+    matrix[4][3] = 10;
+    matrix[4][4] = 10;
 
     return matrix;
 }

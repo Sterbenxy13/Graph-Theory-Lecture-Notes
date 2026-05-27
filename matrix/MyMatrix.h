@@ -12,9 +12,12 @@ class MyMatrix {
         MyMatrix(int** new_matrix, int new_lines, int new_column);
         MyMatrix(const MyMatrix &other);
         virtual ~MyMatrix();
+<<<<<<< HEAD
 
         int *getWienerIndex();
 
         void print();
         void print(std::string title);
+=======
+>>>>>>> ec70df5 (repo init)
 };

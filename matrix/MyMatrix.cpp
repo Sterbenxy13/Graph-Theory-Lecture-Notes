@@ -4,6 +4,7 @@
 #include "MyMatrix.h"
 
 MyMatrix::MyMatrix() {
+<<<<<<< HEAD
     *this = MyMatrix(10, 10);
 }
 
@@ -16,6 +17,29 @@ MyMatrix::MyMatrix(int new_lines, int new_columns) {
         }
     }
     *this = MyMatrix(matrix, new_lines, new_columns);
+=======
+    this->lines = 10;
+    this->columns = 10;
+    this->matrix = new int*[this->lines];
+    for (int i = 0; i < this->lines; i++) {
+        this->matrix[i] = new int[this->columns];
+        for (int j = 0; j < this->columns; j++) {
+            this->matrix[i][j] = 0;
+        }
+    }
+}
+
+MyMatrix::MyMatrix(int new_lines, int new_columns) {
+    this->lines = new_lines;
+    this->columns = new_columns;
+    this->matrix = new int*[this->lines];
+    for (int i = 0; i < this->lines; i++) {
+        this->matrix[i] = new int[this->columns];
+        for (int j = 0; j < this->columns; j++) {
+            this->matrix[i][j] = 0;
+        }
+    }
+>>>>>>> ec70df5 (repo init)
 }
 
 MyMatrix::MyMatrix(int** new_matrix, int new_lines, int new_columns) {
@@ -25,6 +49,7 @@ MyMatrix::MyMatrix(int** new_matrix, int new_lines, int new_columns) {
 }
 
 MyMatrix::MyMatrix(const MyMatrix &other) {
+<<<<<<< HEAD
     this->lines = other.lines;
     this->columns = other.columns;
     this->matrix = new int*[other.lines];
@@ -85,3 +110,11 @@ void MyMatrix::print(std::string title) {
         std::cout << std::endl;
     }
 }
+=======
+    this->matrix = other.matrix;
+    this->lines = other.lines;
+    this->columns = other.columns;
+}
+
+MyMatrix::~MyMatrix() {}
+>>>>>>> ec70df5 (repo init)

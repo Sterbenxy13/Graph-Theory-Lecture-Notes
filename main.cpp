@@ -176,9 +176,30 @@ int main() {
     exeMediana.print("Matriz de pesos das arestas entre p_i e p_j");
     minDistance.print("Matriz com menores distancias entre p_i e p_j");
     int *wieners = minDistance.getWienerIndex();
+    std::cout << "Indice de Wiener para cada vértice:" << std::endl;
+    int minWiener = 99;
+    int *minWienerIndex = new int[MATRIX_SIZE];
+    int lastIndex = 0;
     for (int i = 0; i < minDistance.lines; ++i) {
+        if (wieners[i] < minWiener) {
+            minWiener = wieners[i];
+            minWienerIndex[i] = i;
+            lastIndex++;
+        }
         std::cout << "p" << i + 1 << " -> " << wieners[i] << std::endl;
     }
+
+    std::cout << "Conjunto de vértices mediana: {";
+    for (int i = 0; i < lastIndex; ++i) {
+        if (wieners[minWienerIndex[i]] != minWiener) {
+            continue;
+        }
+        std::cout << "p" << minWienerIndex[i] + 1 << " = " << wieners[minWienerIndex[i]];
+        if (i < lastIndex - 1) {
+            std::cout << ", ";
+        }
+    }
+    std::cout << "}" << std::endl;
 
     return 0;
 }

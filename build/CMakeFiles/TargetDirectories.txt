@@ -1,0 +1,5 @@
+/mnt/slave/Estudo/IF/faculdade/5/Teoria dos Grafos/repo/build/CMakeFiles/myUtils.dir
+/mnt/slave/Estudo/IF/faculdade/5/Teoria dos Grafos/repo/build/CMakeFiles/myMatrix.dir
+/mnt/slave/Estudo/IF/faculdade/5/Teoria dos Grafos/repo/build/CMakeFiles/main_app.dir
+/mnt/slave/Estudo/IF/faculdade/5/Teoria dos Grafos/repo/build/CMakeFiles/edit_cache.dir
+/mnt/slave/Estudo/IF/faculdade/5/Teoria dos Grafos/repo/build/CMakeFiles/rebuild_cache.dir

@@ -1,7 +1,9 @@
 
 #include <iostream>
 
+#include "printing.h"
 #include "MyMatrix.h"
+// #include "ExternalPort.h"
 
 MyMatrix::MyMatrix() {
     *this = MyMatrix(10, 10);
@@ -122,6 +124,7 @@ void MyMatrix::print() {
         for (int j = 0; j < this->columns; j++) {
             std::cout << this->matrix[i][j] << "  | ";
         }
-        std::cout << std::endl;
+        getTableHLine();
+        std::cout << "aa" << std::endl;
     }
 }

@@ -1,8 +1,7 @@
 
 #include <iostream>
 
-// #include "matrix/MyMatrix.h"
-#include "MyMatrix.h"
+#include "matrix/MyMatrix.h"
 
 MyMatrix warshall(MyMatrix adjacencyMatrix) {
     // R = Reachability Matrix
@@ -180,27 +179,6 @@ int main() {
     for (int i = 0; i < minDistance.lines; ++i) {
         std::cout << "p" << i + 1 << " -> " << wieners[i] << std::endl;
     }
-
-    return 0;
-}
-
-int main() {
-
-    MyMatrix A = MyMatrix(getAdjacencyMatrix(), MATRIX_SIZE, MATRIX_SIZE);
-    std::cout << "Matriz de Adjacencia:\n";
-    A.print();
-    
-    MyMatrix R = warshall(A);
-    std::cout << "Matriz de Alcanssabilidade:\n";
-    R.print();
-
-    MyMatrix B = MyMatrix(getWeightMatrix(), MATRIX_SIZE, MATRIX_SIZE);
-    std::cout << "Matriz de Pesos:\n";
-    B.print();
-
-    MyMatrix D = floyd_warshall(B);
-    std::cout << "Matriz com as Menores Distâncias:\n";
-    D.print();
 
     return 0;
 }

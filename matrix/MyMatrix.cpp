@@ -1,32 +1,9 @@
 
 #include <iostream>
 
-#include "printing.h"
 #include "MyMatrix.h"
-// #include "ExternalPort.h"
 
 MyMatrix::MyMatrix() {
-    *this = MyMatrix(10, 10);
-}
-
-MyMatrix::MyMatrix(int new_lines, int new_columns) {
-    int** matrix = new int*[new_lines];
-    for (int i = 0; i < new_lines; i++) {
-        matrix[i] = new int[new_columns];
-        for (int j = 0; j < new_columns; j++) {
-            matrix[i][j] = 0;
-        }
-    }
-    *this = MyMatrix(matrix, new_lines, new_columns);
-    this->lines = 10;
-    this->columns = 10;
-    this->matrix = new int*[this->lines];
-    for (int i = 0; i < this->lines; i++) {
-        this->matrix[i] = new int[this->columns];
-        for (int j = 0; j < this->columns; j++) {
-            this->matrix[i][j] = 0;
-        }
-    }
     *this = MyMatrix(10, 10);
 }
 
@@ -106,25 +83,5 @@ void MyMatrix::print(std::string title) {
             std::cout << std::string(4, '-') << '+';
         }
         std::cout << std::endl;
-    }
-}
-
-MyMatrix::~MyMatrix() {}
-
-void MyMatrix::print() {
-    
-    std::cout << "   | ";
-    for (int i = 0; i < this->lines; i++) {
-        std::cout << 'p' << i + 1 << " | ";
-    }
-    std::cout << std::endl;
-
-    for (int i = 0; i < this->lines; i++) {
-        std::cout << 'p' << i + 1 << " | ";
-        for (int j = 0; j < this->columns; j++) {
-            std::cout << this->matrix[i][j] << "  | ";
-        }
-        getTableHLine();
-        std::cout << "aa" << std::endl;
     }
 }

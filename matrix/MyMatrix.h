@@ -13,5 +13,8 @@ class MyMatrix {
         MyMatrix(const MyMatrix &other);
         virtual ~MyMatrix();
 
+        int *getWienerIndex();
+
         void print();
+        void print(std::string title);
 };

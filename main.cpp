@@ -25,7 +25,7 @@ MyMatrix floyd_warshall(MyMatrix weightMatrix) {
         for (int i = 0; i < D.lines; ++i) {
             for (int j = 0; j < D.lines; ++j) {
                 int sum = D.matrix[i][k] + D.matrix[k][j];
-                if (sum < D.matrix[i][j]) {
+                if (sum < D.matrix[i][j] && (i != j)) {
                     D.matrix[i][j] = sum;
                 }
             }
@@ -115,24 +115,70 @@ int** getWeightMatrix() {
     return matrix;
 }
 
+int** getExercicioMediana() {
+    
+    int** matrix = new int*[MATRIX_SIZE];
+    for (int i = 0; i < MATRIX_SIZE; i++) {
+        matrix[i] = new int[MATRIX_SIZE];
+    }
+
+    matrix[0][0] = 99;
+    matrix[0][1] = 3;
+    matrix[0][2] = 99;
+    matrix[0][3] = 9;
+    matrix[0][4] = 6;
+
+    matrix[1][0] = 3;
+    matrix[1][1] = 99;
+    matrix[1][2] = 2;
+    matrix[1][3] = 5;
+    matrix[1][4] = 8;
+
+    matrix[2][0] = 99;
+    matrix[2][1] = 2;
+    matrix[2][2] = 99;
+    matrix[2][3] = 1;
+    matrix[2][4] = 99;
+
+    matrix[3][0] = 9;
+    matrix[3][1] = 5;
+    matrix[3][2] = 1;
+    matrix[3][3] = 99;
+    matrix[3][4] = 5;
+
+    matrix[4][0] = 6;
+    matrix[4][1] = 8;
+    matrix[4][2] = 99; 
+    matrix[4][3] = 5; 
+    matrix[4][4] = 99;
+    return matrix;
+}
 
 int main() {
 
-    MyMatrix A = MyMatrix(getAdjacencyMatrix(), MATRIX_SIZE, MATRIX_SIZE);
-    std::cout << "Matriz de Adjacencia:\n";
-    A.print();
+    // MyMatrix A = MyMatrix(getAdjacencyMatrix(), MATRIX_SIZE, MATRIX_SIZE);
+    // std::cout << "Matriz de Adjacencia:\n";
+    // A.print();
     
-    MyMatrix R = warshall(A);
-    std::cout << "Matriz de Alcanssabilidade:\n";
-    R.print();
+    // MyMatrix R = warshall(A);
+    // std::cout << "Matriz de Alcanssabilidade:\n";
+    // R.print();
 
-    MyMatrix B = MyMatrix(getWeightMatrix(), MATRIX_SIZE, MATRIX_SIZE);
-    std::cout << "Matriz de Pesos:\n";
-    B.print();
+    // MyMatrix B = MyMatrix(getWeightMatrix(), MATRIX_SIZE, MATRIX_SIZE);
+    // std::cout << "Matriz de Pesos:\n";
+    // B.print();
 
-    MyMatrix D = floyd_warshall(B);
-    std::cout << "Matriz com as Menores Distâncias:\n";
-    D.print();
+    // MyMatrix D = floyd_warshall(B);
+    // D.print("Matriz com as Menores Distancias:");
+
+    MyMatrix exeMediana = MyMatrix(getExercicioMediana(), MATRIX_SIZE, MATRIX_SIZE);
+    MyMatrix minDistance = floyd_warshall(exeMediana);
+    exeMediana.print("Matriz de pesos das arestas entre p_i e p_j");
+    minDistance.print("Matriz com menores distancias entre p_i e p_j");
+    int *wieners = minDistance.getWienerIndex();
+    for (int i = 0; i < minDistance.lines; ++i) {
+        std::cout << "p" << i + 1 << " -> " << wieners[i] << std::endl;
+    }
 
     return 0;
 }

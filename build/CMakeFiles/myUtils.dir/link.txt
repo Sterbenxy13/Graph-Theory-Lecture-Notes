@@ -1,0 +1,2 @@
+/usr/bin/ar qc libmyUtils.a CMakeFiles/myUtils.dir/utils/printing.cpp.o
+/usr/bin/ranlib libmyUtils.a

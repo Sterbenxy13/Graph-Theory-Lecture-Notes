@@ -1,4 +1,13 @@
 
-g++ main.cpp matrix/MyMatrix.cpp -o program
+# g++ main.cpp  -o program
 
-./program
+# ./program
+
+mkdir build 
+cd build
+
+cmake ..
+
+cmake --build .
+
+cd ..

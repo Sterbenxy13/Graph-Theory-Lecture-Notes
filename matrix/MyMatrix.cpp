@@ -39,7 +39,7 @@ MyMatrix::MyMatrix(const MyMatrix &other) {
 
 MyMatrix::~MyMatrix() {}
 
-int *MyMatrix::getWienerIndex() {
+int *MyMatrix::getWienerIndexes() {
     int *wienerList = new int[this->lines];
     for (int i = 0; i < this->lines; ++i) {
         wienerList[i] = 0;

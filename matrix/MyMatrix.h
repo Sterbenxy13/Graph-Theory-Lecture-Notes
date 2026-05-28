@@ -13,7 +13,7 @@ class MyMatrix {
         MyMatrix(const MyMatrix &other);
         virtual ~MyMatrix();
 
-        int *getWienerIndex();
+        int *getWienerIndexes();
 
         void print();
         void print(std::string title);

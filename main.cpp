@@ -175,7 +175,7 @@ int main() {
     MyMatrix minDistance = floyd_warshall(exeMediana);
     exeMediana.print("Matriz de pesos das arestas entre p_i e p_j");
     minDistance.print("Matriz com menores distancias entre p_i e p_j");
-    int *wieners = minDistance.getWienerIndex();
+    int *wieners = minDistance.getWienerIndexes();
     std::cout << "Indice de Wiener para cada vértice:" << std::endl;
     int minWiener = 99;
     int *minWienerIndex = new int[MATRIX_SIZE];
@@ -194,7 +194,7 @@ int main() {
         if (wieners[minWienerIndex[i]] != minWiener) {
             continue;
         }
-        std::cout << "p" << minWienerIndex[i] + 1 << " = " << wieners[minWienerIndex[i]];
+        std::cout << "p" << minWienerIndex[i] + 1 << ": " << wieners[minWienerIndex[i]];
         if (i < lastIndex - 1) {
             std::cout << ", ";
         }

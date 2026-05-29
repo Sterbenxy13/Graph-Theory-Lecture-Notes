@@ -115,7 +115,15 @@ int** getWeightMatrix() {
     return matrix;
 }
 
-int** getExercicioMediana() {
+int** getExercicioMediana1() {
+
+    /*
+        a = 0 = p1
+        b = 1 = p2
+        c = 2 = p3
+        d = 3 = p4
+        e = 4 = p5
+    */
     
     int** matrix = new int*[MATRIX_SIZE];
     for (int i = 0; i < MATRIX_SIZE; i++) {
@@ -154,6 +162,53 @@ int** getExercicioMediana() {
     return matrix;
 }
 
+int** getExercicioMediana2() {
+
+    /*
+        a = 0 = p1
+        b = 1 = p2
+        c = 2 = p3
+        d = 3 = p4
+        e = 4 = p5
+    */
+    
+    int** matrix = new int*[MATRIX_SIZE];
+    for (int i = 0; i < MATRIX_SIZE; i++) {
+        matrix[i] = new int[MATRIX_SIZE];
+    }
+
+    matrix[0][0] = 99;
+    matrix[0][1] = 4;
+    matrix[0][2] = 6;
+    matrix[0][3] = 99;
+    matrix[0][4] = 99;
+
+    matrix[1][0] = 4;
+    matrix[1][1] = 99;
+    matrix[1][2] = 2;
+    matrix[1][3] = 99;
+    matrix[1][4] = 99;
+
+    matrix[2][0] = 6;
+    matrix[2][1] = 2;
+    matrix[2][2] = 99;
+    matrix[2][3] = 1;
+    matrix[2][4] = 5;
+
+    matrix[3][0] = 99;
+    matrix[3][1] = 99;
+    matrix[3][2] = 1;
+    matrix[3][3] = 99;
+    matrix[3][4] = 3;
+
+    matrix[4][0] = 99;
+    matrix[4][1] = 99;
+    matrix[4][2] = 5; 
+    matrix[4][3] = 3; 
+    matrix[4][4] = 99;
+    return matrix;
+}
+
 int main() {
 
     // MyMatrix A = MyMatrix(getAdjacencyMatrix(), MATRIX_SIZE, MATRIX_SIZE);
@@ -171,12 +226,59 @@ int main() {
     // MyMatrix D = floyd_warshall(B);
     // D.print("Matriz com as Menores Distancias:");
 
-    MyMatrix exeMediana = MyMatrix(getExercicioMediana(), MATRIX_SIZE, MATRIX_SIZE);
+    // MyMatrix exeMediana = MyMatrix(getExercicioMediana1(), MATRIX_SIZE, MATRIX_SIZE);
+    // MyMatrix minDistance = floyd_warshall(exeMediana);
+    // exeMediana.print("Matriz de pesos das arestas entre p_i e p_j");
+    // minDistance.print("Matriz com menores distancias entre p_i e p_j");
+    // int *wieners = minDistance.getWienerIndexes();
+    // std::cout << "Indice de Wiener para cada vértice:" << std::endl;
+    // int minWiener = 99;
+    // int *minWienerIndex = new int[MATRIX_SIZE];
+    // int lastIndex = 0;
+    // for (int i = 0; i < minDistance.lines; ++i) {
+    //     if (wieners[i] < minWiener) {
+    //         minWiener = wieners[i];
+    //         minWienerIndex[i] = i;
+    //         lastIndex++;
+    //     }
+    //     std::cout << "p" << i + 1 << " -> " << wieners[i] << std::endl;
+    // }
+
+    // std::cout << "Conjunto de vértices mediana: {";
+    // for (int i = 0; i < lastIndex; ++i) {
+    //     if (wieners[minWienerIndex[i]] != minWiener) {
+    //         continue;
+    //     }
+    //     std::cout << "p" << minWienerIndex[i] + 1 << ": " << wieners[minWienerIndex[i]];
+    //     if (i < lastIndex - 1) {
+    //         std::cout << ", ";
+    //     }
+    // }
+    // std::cout << "}" << std::endl;
+
+    MyMatrix exeMediana = MyMatrix(getExercicioMediana2(), MATRIX_SIZE, MATRIX_SIZE);
+    int* pesosVertices = new int[MATRIX_SIZE];
+    pesosVertices[0] = 3;
+    pesosVertices[1] = 1;
+    pesosVertices[2] = 2;
+    pesosVertices[3] = 1;
+    pesosVertices[4] = 4;
     MyMatrix minDistance = floyd_warshall(exeMediana);
+    MyMatrix minWeightedDistance = MyMatrix(minDistance);
+    for (int j = 0; j < minWeightedDistance.columns; ++j) {
+        for (int i = 0; i < minWeightedDistance.lines; ++i) {
+            if (i == j) {
+                continue;
+            }
+            minWeightedDistance.matrix[i][j] = minWeightedDistance.matrix[i][j] * pesosVertices[j];
+        }
+    }
     exeMediana.print("Matriz de pesos das arestas entre p_i e p_j");
     minDistance.print("Matriz com menores distancias entre p_i e p_j");
+    minWeightedDistance.print("Matriz com as menores distancias ajustadas por peso do vértice destino");
+
     int *wieners = minDistance.getWienerIndexes();
-    std::cout << "Indice de Wiener para cada vértice:" << std::endl;
+    std::cout << "Indice de Wiener para cada vertice:" << std::endl;
     int minWiener = 99;
     int *minWienerIndex = new int[MATRIX_SIZE];
     int lastIndex = 0;
@@ -189,7 +291,33 @@ int main() {
         std::cout << "p" << i + 1 << " -> " << wieners[i] << std::endl;
     }
 
-    std::cout << "Conjunto de vértices mediana: {";
+    std::cout << "Conjunto de vertices mediana: {";
+    for (int i = 0; i < lastIndex; ++i) {
+        if (wieners[minWienerIndex[i]] != minWiener) {
+            continue;
+        }
+        std::cout << "p" << minWienerIndex[i] + 1 << ": " << wieners[minWienerIndex[i]];
+        if (i < lastIndex - 1) {
+            std::cout << ", ";
+        }
+    }
+    std::cout << "}" << std::endl;
+
+    wieners = minWeightedDistance.getWienerIndexes();
+    std::cout << "Indice de Wiener ajustado para cada vertice:" << std::endl;
+    minWiener = 99;
+    minWienerIndex = new int[MATRIX_SIZE];
+    lastIndex = 0;
+    for (int i = 0; i < minWeightedDistance.lines; ++i) {
+        if (wieners[i] < minWiener) {
+            minWiener = wieners[i];
+            minWienerIndex[i] = i;
+            lastIndex++;
+        }
+        std::cout << "p" << i + 1 << " -> " << wieners[i] << std::endl;
+    }
+
+    std::cout << "Conjunto de vertices mediana com peso ajustado: {";
     for (int i = 0; i < lastIndex; ++i) {
         if (wieners[minWienerIndex[i]] != minWiener) {
             continue;

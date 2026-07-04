@@ -1,5 +1,5 @@
-S,,Sao_Paulo,Baixada_Santista,Vale_do_Paraiba
-,D,50,120,80
-60,Loja_1,8,12,10
-40,Loja_2,4,10,6
-50,Loja_3,6,15,12
+,S,Sao_Paulo,Baixada_Santista,Vale_do_Paraiba
+D,,50,120,80
+Loja_1,60,8,12,10
+Loja_2,40,4,10,6
+Loja_3,50,6,15,12

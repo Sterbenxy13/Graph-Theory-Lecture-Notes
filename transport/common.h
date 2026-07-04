@@ -39,4 +39,8 @@ Node** getMatrix(Supply* supplies, int supplyCount, Demand* demands, int demandC
 
 AllInOneBox loadMatrix(std::string relativePath, int SupplyCount, int DemandCount);
 
+Demand* serializeDemandNames(Demand* demands, std::string line);
+
+Demand* serializeDemandValues(Demand* demands, std::string line);
+
 #endif

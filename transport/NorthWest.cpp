@@ -11,7 +11,14 @@ int main() {
     AllInOneBox matrix = loadMatrix("./transport/matriz.csv", 3, 3);
 
     for (int i = 0; i < 3; i++) {
-        std::cout << matrix.demands[i].name << std::endl;
+        std::cout << matrix.demands[i].name << " , " << matrix.demands[i].demand << std::endl;
+    }
+
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            std::cout << matrix.matrix[i][j].cost << ',';
+        }
+        std::cout << std::endl;
     }
 
     // int size {2};

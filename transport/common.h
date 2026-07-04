@@ -5,8 +5,8 @@
 #include <iostream>
 
 struct Demand {
-    std::string name;
     int demand;
+    std::string name;
 };
 
 struct Node {
@@ -15,8 +15,14 @@ struct Node {
 };
 
 struct Supply {
-    std::string name;
     int capacity;
+    std::string name;
+};
+
+struct AllInOneBox {
+    Node**  matrix;
+    Demand* demands;
+    Supply* supplies;
 };
 
 int getInt(std::string message);
@@ -31,6 +37,6 @@ Supply* getSupplies(int size);
 
 Node** getMatrix(Supply* supplies, int supplyCount, Demand* demands, int demandCount);
 
-Node** loadMatrix(std::string relativePath, int SupplyCount, int DemandCount);
+AllInOneBox loadMatrix(std::string relativePath, int SupplyCount, int DemandCount);
 
 #endif

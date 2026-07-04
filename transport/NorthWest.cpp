@@ -8,7 +8,11 @@
 
 int main() {
 
-    Node** matrix = loadMatrix("./transport/matriz.csv", 3, 3);
+    AllInOneBox matrix = loadMatrix("./transport/matriz.csv", 3, 3);
+
+    for (int i = 0; i < 3; i++) {
+        std::cout << matrix.demands[i].name << std::endl;
+    }
 
     // int size {2};
     // Supply* sups = getSupplies(size);

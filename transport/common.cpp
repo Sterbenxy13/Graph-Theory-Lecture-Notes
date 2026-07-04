@@ -80,31 +80,57 @@ Exemplo:
 50 , Loja_3 ,     6     ,       15         ,       12
 ,,,,
 */
-Node** loadMatrix(std::string relativePath, int SupplyCount, int DemandCount) {
+AllInOneBox loadMatrix(std::string relativePath, int supplyCount, int demandCount) {
 
     
     std::ifstream file {relativePath.c_str()};
 
     if (!file) {
         std::cerr << "Nao foi possivel abrir o arquivo em " << relativePath << std::endl;
-        return 0;
+        return AllInOneBox();
     }
 
+    Demand* demands  = new Demand[demandCount];
+    for (int i = 0; i < demandCount; ++i) {
+        demands[i] = Demand();
+    }
+    Supply* supplies = new Supply[supplyCount];
+    
     std::string line{};
-    file >> line;       // Carrega o cabecalho.
-    int colCounter{-1}; // Para não contabilizar a coluna de fornecedores.
-    for (int i = 0; i < line.length(); i++) {
-        if (line[i] == ',') {
-            colCounter++;
-        }
-    }
-    Demand* demands = new Demand[colCounter];
+    
+    file >> line; // Primeira linha com nomes das Demandas
 
-    int rowCounter{0}; // Para ignorar a ultima linha(de Demandas)
+    int virgCounter {0};
+    int charPos {0};
+    while (virgCounter < 2) {
+        if (line[charPos] == ',') {
+            ++virgCounter;
+        }
+        ++charPos;
+    }
+    
+    int demandCounter {0};
+    std::string demandName {};
+    while (line[charPos] != '\0') {
+        if (line[charPos] == ',') {
+            demands[demandCounter].name = demandName;
+            demandName = "";
+            ++demandCounter;
+        } else {
+            demandName = demandName + line[charPos];
+        }
+        ++charPos;
+    }
+
     while (file >> line) {
         std::cout << line << std::endl;
     }
 
     file.close();
     std::cout << "content in file: " << line << std::endl;
+
+    AllInOneBox result = AllInOneBox();
+    result.demands = demands;
+    result.supplies = supplies;
+    return result;
 }

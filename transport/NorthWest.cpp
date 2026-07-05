@@ -3,8 +3,8 @@
 
 #include "common.h"
 
-Memory northWestDistribution(AllInOneBox problem, int supplyCount, int demandCount) {
-    Memory memory = initMemory(supplyCount, demandCount);
+AllInOneBox northWestDistribution(AllInOneBox problem, int supplyCount, int demandCount) {
+    Memory* memory = problem.initMemory(supplyCount, demandCount);
 
     Demand* demands = problem.demands;
     Supply* supplies = problem.supplies;
@@ -18,7 +18,8 @@ Memory northWestDistribution(AllInOneBox problem, int supplyCount, int demandCou
 
     Demand* currentDemand;
     Supply* currentSupply;
-    Node currentNode;
+    // Node currentNode;
+    Tuple currentPosition;
     while (
         (demandIndex < demandCount) 
         & (supplyIndex < supplyCount)
@@ -28,7 +29,8 @@ Memory northWestDistribution(AllInOneBox problem, int supplyCount, int demandCou
 
         currentCapacity = (*currentSupply).capacity;
         currentDemandValue = (*currentDemand).demand;
-        currentNode = problem.matrix[supplyIndex][demandIndex];
+        (*memory).append(supplyIndex, demandIndex);
+        // currentNode = problem.matrix[supplyIndex][demandIndex];
 
         if (currentCapacity > currentDemandValue) {
             currentReduction = currentDemandValue;
@@ -44,14 +46,15 @@ Memory northWestDistribution(AllInOneBox problem, int supplyCount, int demandCou
             supplyIndex++;
 
         }
-        currentNode.value = currentReduction;
-        memory.append(currentNode);
+        // currentNode.value = currentReduction;
+        // (*memory).append(currentNode);
 
         (*currentSupply).capacity = currentCapacity - currentReduction;
         (*currentDemand).demand = currentDemandValue - currentReduction;
+        problem.matrix[memory->getLast().sIndex][memory->getLast().dIndex].value = currentReduction;
     }
 
-    return memory;
+    return problem;
 }
 
 int main() {
@@ -81,11 +84,17 @@ int main() {
 
     std::cout << "Distribuicao:" << std::endl;
 
-    Memory path = northWestDistribution(matrix, supplyCount, demandCount);
+    AllInOneBox path = northWestDistribution(matrix, supplyCount, demandCount);
 
-    for (int i = 0; i < path.size; i++) {
-        std::cout << path.memory[i].cost << ',' << path.memory[i].value << std::endl;
+    int s {0};
+    int d {0};
+    for (int i = 0; i < path.memory.size; i++) {
+        s = path.memory.memory[i].sIndex;
+        d = path.memory.memory[i].dIndex;
+        std::cout << path.supplies[s].name << " entrega " << path.matrix[s][d].value << " para " << path.demands[d].name << " com custo: " << path.matrix[s][d].cost << std::endl;
     }
+
+    std::cout << "Z: " << calcZ(path) << std::endl;
 
     return 0;
 }

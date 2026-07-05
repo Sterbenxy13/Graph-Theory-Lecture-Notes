@@ -222,11 +222,16 @@ Demand* serializeDemandValues(Demand* demands, std::string line) {
     return demands;
 }
 
-Memory initMemory(int supplyCount, int demandCount) {
-    int s = supplyCount * demandCount;
-    Node* list = new Node[s];
-    Memory mem = Memory();
-    mem.memory = list;
-    mem.size = 0;
-    return mem;    
+int calcZ(AllInOneBox problem) {
+    int sum {0};
+    int s {0};
+    int d {0};
+    Node current;
+    for (int i = 0; i < problem.memory.size; i++) {
+        s = problem.memory.memory[i].sIndex;
+        d = problem.memory.memory[i].dIndex;
+        current = problem.matrix[s][d];
+        sum = sum + (current.cost * current.value);
+    }
+    return sum;
 }

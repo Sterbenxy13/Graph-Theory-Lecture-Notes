@@ -4,14 +4,35 @@
 
 #include <iostream>
 
-struct Demand {
-    int demand;
-    std::string name;
+struct Tuple {
+    int sIndex;
+    int dIndex;
 };
 
 struct Node {
     int cost;
     int value;
+};
+
+struct Memory {
+    Tuple* memory;
+    int size;
+
+    void append(int supplyIndex, int demandIndex) {
+        memory[size] = Tuple();
+        memory[size].sIndex = supplyIndex;
+        memory[size].dIndex = demandIndex;
+        size++;
+    }
+
+    Tuple getLast() {
+        return this->memory[this->size - 1];
+    }
+};
+
+struct Demand {
+    int demand;
+    std::string name;
 };
 
 struct Supply {
@@ -23,17 +44,18 @@ struct AllInOneBox {
     Node**  matrix;
     Demand* demands;
     Supply* supplies;
-};
+    Memory memory;
 
-struct Memory {
-    Node* memory;
-    int size;
-
-    void append(Node newItem) {
-        memory[size] = newItem;
-        size++;
+    Memory* initMemory(int supplyCount, int demandCount) {
+        int s = supplyCount * demandCount;
+        Tuple* list = new Tuple[s];
+        this->memory = Memory();
+        this->memory.memory = list;
+        this->memory.size = 0;
+        return &this->memory;    
     }
 };
+
 
 int getInt(std::string message);
 
@@ -53,6 +75,6 @@ Demand* serializeDemandNames(Demand* demands, std::string line);
 
 Demand* serializeDemandValues(Demand* demands, std::string line);
 
-Memory initMemory(int supplyCount, int demandCount);
+int calcZ(AllInOneBox problem);
 
 #endif

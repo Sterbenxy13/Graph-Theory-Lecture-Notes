@@ -25,6 +25,16 @@ struct AllInOneBox {
     Supply* supplies;
 };
 
+struct Memory {
+    Node* memory;
+    int size;
+
+    void append(Node newItem) {
+        memory[size] = newItem;
+        size++;
+    }
+};
+
 int getInt(std::string message);
 
 std::string getString(std::string);
@@ -42,5 +52,7 @@ AllInOneBox loadMatrix(std::string relativePath, int SupplyCount, int DemandCoun
 Demand* serializeDemandNames(Demand* demands, std::string line);
 
 Demand* serializeDemandValues(Demand* demands, std::string line);
+
+Memory initMemory(int supplyCount, int demandCount);
 
 #endif

@@ -117,7 +117,6 @@ AllInOneBox loadMatrix(std::string relativePath, int supplyCount, int demandCoun
     std::string cost {};
     int demandCounter {0};
     while (file >> line) {
-        std::cout << "linha avaliada: " << line << std::endl;
         matrix[supplyCounter] = new Node[demandCount];
         charPos = 0;
 
@@ -133,15 +132,10 @@ AllInOneBox loadMatrix(std::string relativePath, int supplyCount, int demandCoun
         // segunda coluna: Serializa capacidade
         supplyCapacity = "";
         while (line[charPos] != ',') {
-            std::cout << "char avaliado: " << line[charPos] << std::endl;
             supplyCapacity = supplyCapacity + line[charPos];
             charPos++;
         }
-        try {
-            supplies[supplyCounter].capacity = std::stoi(supplyCapacity);
-        } catch (const std::invalid_argument e) {
-            std::cerr << "Argumento invalido: " << e.what() << supplyCapacity;
-        }
+        supplies[supplyCounter].capacity = std::stoi(supplyCapacity);
         
         ++charPos;
 
@@ -226,4 +220,13 @@ Demand* serializeDemandValues(Demand* demands, std::string line) {
     demands[demandCounter].demand = std::stoi(demandValue);
 
     return demands;
+}
+
+Memory initMemory(int supplyCount, int demandCount) {
+    int s = supplyCount * demandCount;
+    Node* list = new Node[s];
+    Memory mem = Memory();
+    mem.memory = list;
+    mem.size = 0;
+    return mem;    
 }

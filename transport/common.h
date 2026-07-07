@@ -4,6 +4,8 @@
 
 #include <iostream>
 
+#include "sort.cpp"
+
 struct Tuple {
     int sIndex;
     int dIndex;
@@ -16,7 +18,16 @@ struct Node {
 
 struct Memory {
     Tuple* memory;
+    int head = 0;
     int size;
+
+    void init(int supplyCount, int demandCount) {
+        for (int i = 0; i < supplyCount; i++) {
+            for (int j = 0; j < demandCount; j++) {
+                this->append(i, j);
+            }
+        }
+    }
 
     void append(int supplyIndex, int demandIndex) {
         memory[size] = Tuple();
@@ -25,8 +36,16 @@ struct Memory {
         size++;
     }
 
+    Tuple getFirst() {
+        return this->memory[head];
+    }
+
     Tuple getLast() {
         return this->memory[this->size - 1];
+    }
+
+    void sort(Node** matrix) {
+        
     }
 };
 

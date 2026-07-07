@@ -1,6 +1,8 @@
 
 #include<iostream>
 
+#include "common.h"
+
 using namespace std;
 
 int powerTo(int a, int b) {
@@ -17,8 +19,8 @@ int powerTo(int a, int b) {
     return result;
 }
 
-int* countingSort(int* vetor, int n, int d) {
-    int* result = new int[n];
+Memory countingSort(Memory vetor, Node** matrix, int n, int d) {
+    Memory result = vetor;
 
     int* aux = new int[10];
     for (int i = 0; i < 10; i++) {
@@ -42,10 +44,10 @@ int* countingSort(int* vetor, int n, int d) {
     return result;
 }
 
-int* radixSort(int* A, int n, int d) {
-    int* result = A;
+Memory radixSort(Memory A, Node** matrix, int supplyCount, int demandCount, int d) {
+    Memory result = A;
     for (int i = 1; i <= d; i++) {
-        result = countingSort(result, n, i);
+        result = countingSort(result, matrix, supplyCount, demandCount, i);
     }
 
     return result;

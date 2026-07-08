@@ -7,10 +7,11 @@
 
 int main() {
 
-    int supplyCount {3};
-    int demandCount {3};
+    int supplyCount {12};
+    int demandCount {12};
 
-    AllInOneBox matrix = loadMatrix("./transport/matriz.csv", supplyCount, demandCount);
+    // AllInOneBox matrix = loadMatrix("./transport/matriz.csv", supplyCount, demandCount);
+    AllInOneBox matrix = loadMatrix("./transport/grande.csv", supplyCount, demandCount);
 
     std::cout << "Consumidores e demandas: " << std::endl;
     for (int i = 0; i < demandCount; i++) {
@@ -37,12 +38,15 @@ int main() {
 
     int s {0};
     int d {0};
+    int totalCost {0};
     for (int i = 0; i < result.memory.size; i++) {
         s = result.memory.memory[i].sIndex;
         d = result.memory.memory[i].dIndex;
         std::cout << result.supplies[s].name << " entrega " << result.matrix[s][d].value << " para " << result.demands[d].name << " com custo: " << result.matrix[s][d].cost << std::endl;
+        totalCost = totalCost + result.matrix[s][d].cost;
     }
 
+    std::cout << "Custo total: " << totalCost << std::endl;
     std::cout << "Z: " << calcZ(result) << std::endl;
 
     return 0;

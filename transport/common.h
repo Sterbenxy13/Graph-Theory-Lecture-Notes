@@ -4,7 +4,7 @@
 
 #include <iostream>
 
-#include "sort.cpp"
+// #include "sort.cpp"
 
 struct Tuple {
     int sIndex;
@@ -44,8 +44,14 @@ struct Memory {
         return this->memory[this->size - 1];
     }
 
-    void sort(Node** matrix) {
-        
+    bool contains(int supplyIndex, int demandIndex) {
+        bool result = false;
+        for (int i = 0; i < size; i++) {
+            if (this->memory[i].sIndex == supplyIndex & this->memory[i].dIndex == demandIndex) {
+                result = true;
+            }
+        }
+        return result;
     }
 };
 
@@ -74,7 +80,6 @@ struct AllInOneBox {
         return &this->memory;    
     }
 };
-
 
 int getInt(std::string message);
 

@@ -92,10 +92,13 @@ AllInOneBox loadMatrix(std::string relativePath, int supplyCount, int demandCoun
     std::string line{};
 
     Demand* demands  = new Demand[demandCount];
-    for (int i = 0; i < demandCount; ++i) {
+    for (int i = 0; i < demandCount; i++) {
         demands[i] = Demand();
     }
     Supply* supplies = new Supply[supplyCount];
+    for (int i = 0; i < supplyCount; i++) {
+        supplies[i] = Supply();
+    }
     
     // primeira linha: nomes dos consumidores
     file >> line;
@@ -146,6 +149,7 @@ AllInOneBox loadMatrix(std::string relativePath, int supplyCount, int demandCoun
             if (line[charPos] == ',') {
                 matrix[supplyCounter][demandCounter] = Node();
                 matrix[supplyCounter][demandCounter].cost = std::stoi(cost);
+                // matrix[supplyCounter][demandCounter].value = 0;
                 cost = "";
                 ++demandCounter;
             } else {
@@ -155,6 +159,7 @@ AllInOneBox loadMatrix(std::string relativePath, int supplyCount, int demandCoun
         }
         matrix[supplyCounter][demandCounter] = Node();
         matrix[supplyCounter][demandCounter].cost = std::stoi(cost);
+        // matrix[supplyCounter][demandCounter].value = 0;
 
         ++supplyCounter;
     }

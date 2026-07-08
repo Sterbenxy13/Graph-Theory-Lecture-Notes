@@ -4,14 +4,15 @@
 #include "common.h"
 #include "northWest.cpp"
 #include "minCost.cpp"
+#include "vogel.cpp"
 
 int main() {
 
-    int supplyCount {12};
-    int demandCount {12};
+    int supplyCount {3};
+    int demandCount {3};
 
-    // AllInOneBox matrix = loadMatrix("./transport/matriz.csv", supplyCount, demandCount);
-    AllInOneBox matrix = loadMatrix("./transport/grande.csv", supplyCount, demandCount);
+    AllInOneBox matrix = loadMatrix("./transport/matriz.csv", supplyCount, demandCount);
+    // AllInOneBox matrix = loadMatrix("./transport/grande.csv", supplyCount, demandCount);
 
     std::cout << "Consumidores e demandas: " << std::endl;
     for (int i = 0; i < demandCount; i++) {
@@ -34,7 +35,8 @@ int main() {
     std::cout << "Distribuicao:" << std::endl;
 
     // AllInOneBox result = northWestDistribution(matrix, supplyCount, demandCount);
-    AllInOneBox result = minCost(matrix, supplyCount, demandCount);
+    // AllInOneBox result = minCost(matrix, supplyCount, demandCount);
+    AllInOneBox result = vogel(matrix, supplyCount, demandCount);
 
     int s {0};
     int d {0};

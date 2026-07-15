@@ -50,32 +50,3 @@ int* radixSort(int* A, int n, int d) {
 
     return result;
 }
-
-// int main() {
-//     int* A = new int[8];
-
-//     A[0] = 491;
-//     A[1] = 348;
-//     A[2] = 736;
-//     A[3] = 653;
-//     A[4] = 231;
-//     A[5] = 492;
-//     A[6] = 785;
-//     A[7] = 111;
-
-//     int* ordenado = radixSort(A, 8, 3);
-
-//     cout << "A:" << endl;
-//     for (int i = 0; i <  8; i ++) {
-//         cout << A[i] << endl;
-//     }
-
-//     cout << "A ordenado:" << endl;
-//     for (int i = 0; i <  8; i ++) {
-//         cout << ordenado[i] << endl;
-//     }
-
-//     return 0;
-
-// }
-

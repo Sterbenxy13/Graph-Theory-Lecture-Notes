@@ -11,8 +11,7 @@ int main() {
     int supplyCount {3};
     int demandCount {3};
 
-    AllInOneBox matrix = loadMatrix("./transport/matriz.csv", supplyCount, demandCount);
-    // AllInOneBox matrix = loadMatrix("./transport/grande.csv", supplyCount, demandCount);
+    AllInOneBox matrix = loadMatrix("./matriz.csv", supplyCount, demandCount);
 
     std::cout << "Consumidores e demandas: " << std::endl;
     for (int i = 0; i < demandCount; i++) {

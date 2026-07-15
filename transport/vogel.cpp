@@ -22,7 +22,6 @@ Tuple blockLine(AllInOneBox problem, int supplyCount, int demandCount) {
             if (problem.matrix[s][d].cost < secMinSupplyCost && problem.matrix[s][d].cost > minSupplyCost) {
                 secMinSupplyCost = problem.matrix[s][d].cost;
             }
-            std::cout << "vendo as linhas, olhei para a pos: " << s << " , " << d << std::endl;
         }
         if ((secMinSupplyCost - minSupplyCost) > maxSupplyWeight) {
             minPos.sIndex = s;
@@ -63,7 +62,6 @@ Tuple blockColumn(AllInOneBox problem, int supplyCount, int demandCount) {
             if (problem.matrix[s][d].cost < secMinDemandCost && problem.matrix[s][d].cost > minDemandCost) {
                 secMinDemandCost = problem.matrix[s][d].cost;
             }
-            std::cout << "vendo as colunas, olhei para a pos: " << s << " , " << d << std::endl;
         }
         if ((secMinDemandCost - minDemandCost) > maxDemandWeight) {
             minPos.dIndex = d;
@@ -104,17 +102,8 @@ AllInOneBox vogel(AllInOneBox problem, int supplyCount, int demandCount) {
     Tuple minPos;
     minPos.sIndex;
     minPos.dIndex;
-
-    std::cout << "vai iniciar o while" << std::endl;
-
     bool linha = true;
-
-    int nada = 0;
     while (remainingDemand > 0) {
-        // minSupplyValue = 999;
-        // secMinSupplyValue = 999;
-        // minPos.sIndex = 0;
-        // minPos.dIndex = 0;
 
         if (linha) {
             minPos = blockLine(problem, supplyCount, demandCount);
@@ -123,29 +112,14 @@ AllInOneBox vogel(AllInOneBox problem, int supplyCount, int demandCount) {
         }
         linha = ! linha;
 
-        std::cout << "definiu oferta e demanda: " << minPos.sIndex << " , " << minPos.dIndex << std::endl;
-
         currentDemand = &(demands[minPos.dIndex]);
         currentSupply = &(supplies[minPos.sIndex]);
 
-        std::cout << "resolveu enderecos" << std::endl;
-
         currentCapacity = (*currentSupply).capacity;
 
-        std::cout << "pegou capacidade atual" << std::endl;
-
         currentDemandValue = (*currentDemand).demand;
-
-        std::cout << "pegou demanda atual" << std::endl;
-
-        // std::cout << "endereco da memoria: " << &(memory->getLast()) << std::endl;
-        // std::cout << "ultimo da memoria: " << memory->getLast().sIndex << " , " << memory->getLast().dIndex << std::endl;
         
         (*memory).append(minPos.sIndex, minPos.dIndex);
-
-        std::cout << "tamanho da memoria: " << memory->size << std::endl;
-
-        std::cout << "appendeu memoria" << std::endl;
 
         if (currentCapacity > currentDemandValue) {
             currentReduction = currentDemandValue;
@@ -174,14 +148,10 @@ AllInOneBox vogel(AllInOneBox problem, int supplyCount, int demandCount) {
             }
         }
 
-        std::cout << "resolveu ifs" << std::endl;
-
         (*currentSupply).capacity = (*currentSupply).capacity - currentReduction;
         (*currentDemand).demand = (*currentDemand).demand - currentReduction;
         remainingDemand = remainingDemand - currentReduction;
         problem.matrix[minPos.sIndex][minPos.dIndex].value = currentReduction;
-
-        // std::cin >> nada;
     }
     return problem;
 }

@@ -2,10 +2,6 @@
 #ifndef COMMON
 #define COMMON
 
-#include <iostream>
-
-// #include "sort.cpp"
-
 struct Tuple {
     int sIndex;
     int dIndex;

@@ -50,17 +50,17 @@ struct Memory {
         return result;
     }
 
-    // void remove(int supplyIndex, int demandIndex) {
-    //     for (int i = 0; i < size; i++) {
-    //         if (this->memory[i].sIndex == supplyIndex & this->memory[i].dIndex == demandIndex) {
-    //             this->memory[i].sIndex = this->memory[this->size - 1].sIndex;
-    //             this->memory[i].dIndex = this->memory[this->size - 1].dIndex;
-    //             // this->memory[this->size - 1].sIndex = -1;
-    //             // this->memory[this->size - 1].dIndex = -1;
-    //             this->size--;
-    //         }
-    //     }
-    // }
+    void remove(int supplyIndex, int demandIndex) {
+        for (int i = 0; i < size; i++) {
+            if (this->memory[i].sIndex == supplyIndex & this->memory[i].dIndex == demandIndex) {
+                this->memory[i].sIndex = this->memory[this->size - 1].sIndex;
+                this->memory[i].dIndex = this->memory[this->size - 1].dIndex;
+                // this->memory[this->size - 1].sIndex = -1;
+                // this->memory[this->size - 1].dIndex = -1;
+                this->size--;
+            }
+        }
+    }
 };
 
 struct Demand {

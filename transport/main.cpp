@@ -62,7 +62,7 @@ int main() {
 
     // ITERAÇÃO
 
-    duality(result, supplyCount, demandCount);
+    int iterations = duality(result, supplyCount, demandCount);
 
     totalCost = 0;
     for (int i = 0; i < result.memory.size; i++) {
@@ -74,6 +74,7 @@ int main() {
 
     std::cout << "Custo total: " << totalCost << std::endl;
     std::cout << "Z: " << calcZ(result) << std::endl;
+    std::cout << "Numero de correcoes: " << iterations << std::endl;
 
     return 0;
 }

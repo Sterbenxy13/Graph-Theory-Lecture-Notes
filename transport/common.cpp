@@ -149,7 +149,7 @@ AllInOneBox loadMatrix(std::string relativePath, int supplyCount, int demandCoun
             if (line[charPos] == ',') {
                 matrix[supplyCounter][demandCounter] = Node();
                 matrix[supplyCounter][demandCounter].cost = std::stoi(cost);
-                // matrix[supplyCounter][demandCounter].value = 0;
+                matrix[supplyCounter][demandCounter].value = 0;
                 cost = "";
                 ++demandCounter;
             } else {
@@ -159,7 +159,7 @@ AllInOneBox loadMatrix(std::string relativePath, int supplyCount, int demandCoun
         }
         matrix[supplyCounter][demandCounter] = Node();
         matrix[supplyCounter][demandCounter].cost = std::stoi(cost);
-        // matrix[supplyCounter][demandCounter].value = 0;
+        matrix[supplyCounter][demandCounter].value = 0;
 
         ++supplyCounter;
     }

@@ -1,15 +1,19 @@
 
+#include <string>
+
 #ifndef COMMON
 #define COMMON
 
 struct Tuple {
     int sIndex;
     int dIndex;
+    bool artificial = false;
 };
 
 struct Node {
     int cost;
     int value;
+    bool artificial = false;
 };
 
 struct Memory {
@@ -25,10 +29,11 @@ struct Memory {
         }
     }
 
-    void append(int supplyIndex, int demandIndex) {
+    void append(int supplyIndex, int demandIndex, bool artificial = false) {
         memory[size] = Tuple();
         memory[size].sIndex = supplyIndex;
         memory[size].dIndex = demandIndex;
+        memory[size].artificial = artificial;
         size++;
     }
 
@@ -96,5 +101,9 @@ Demand* serializeDemandNames(Demand* demands, std::string line);
 Demand* serializeDemandValues(Demand* demands, std::string line);
 
 int calcZ(AllInOneBox problem);
+
+void handleDegeneracy(AllInOneBox& problem, int supplyCount, int demandCount);
+
+AllInOneBox duality(AllInOneBox problem, int supplyCount, int demandCount);
 
 #endif

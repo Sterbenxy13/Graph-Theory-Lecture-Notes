@@ -31,6 +31,9 @@ int duality(AllInOneBox matrix, int supplyCount, int demandCount) {
         Tuple* backup = new Tuple[basicsCount];
         int lastBackup = 0;
         supplyCoefs[0] = 0;
+        if (matrix.memory.size < basicsCount) {
+            // degeneração
+        }
         for (int i = 0; i < (matrix.memory.size); i++) {    // Define os coeficientes e reserva os que não são determináveis.
             int sI = matrix.memory.memory[i].sIndex;
             int dI = matrix.memory.memory[i].dIndex;
@@ -86,6 +89,9 @@ int duality(AllInOneBox matrix, int supplyCount, int demandCount) {
         std::cout << max.sIndex << " , " << max.dIndex << ": " << maxOportunityCost << std::endl;
 
         if (maxOportunityCost <= 0) {
+            delete[] supplyCoefs;
+            delete[] demandCoefs;
+            delete[] backup;
             return counter;
         }
         counter++;

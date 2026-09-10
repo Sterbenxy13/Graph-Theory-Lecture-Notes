@@ -62,16 +62,6 @@ int duality(AllInOneBox matrix, int supplyCount, int demandCount) {
             }
         }
 
-        // for (int i = 0; i < supplyCount; i++) {
-        //     std::cout << supplyCoefs[i] << ", ";
-        // }
-        // std::cout << std::endl;
-        // for (int i = 0; i < demandCount; i++) {
-        //     std::cout << demandCoefs[i] << ", ";
-        // }
-        // std::cout << std::endl;
-
-
         // Calcula os /cij para os restantes (xij == 0)
         // o max disso será a nova base
         Tuple max = Tuple();
@@ -116,7 +106,6 @@ int duality(AllInOneBox matrix, int supplyCount, int demandCount) {
             if (matrix.matrix[max.sIndex][item.dIndex].value > 0
                 and matrix.matrix[item.sIndex][max.dIndex].value > 0
             ) {
-                // std::cout << item.sIndex << ", " << item.dIndex << " ; " << max.sIndex << ", " << max.dIndex << std::endl;
                 matrix.memory.append(max.sIndex, max.dIndex);
                 break;
             }

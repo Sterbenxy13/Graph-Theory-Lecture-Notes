@@ -166,10 +166,81 @@ AllInOneBox loadMatrix(std::string relativePath, int supplyCount, int demandCoun
 
     file.close();
 
+    // Ajuste de desbalanceamento entre Oferta e Demanda
+    int totalSupply {0};
+    for (int i = 0; i < supplyCount; i++) {
+        totalSupply = totalSupply + supplies[i].capacity;
+    }
+    int totalDemand {0};
+    for (int i = 0; i < demandCount; i++) {
+        totalDemand = totalDemand + demands[i].demand;
+    }
+
+    Supply* finalSupplies;
+    Demand* finalDemands;
+    Node** finalMatrix;
+    if (totalSupply != totalDemand) {
+        int diff = totalSupply - totalDemand;
+
+        if (diff > 0) {
+            finalSupplies = supplies;
+            finalDemands = new Demand[demandCount + 1];
+            for (int i = 0; i < demandCount; i++) {
+                finalDemands[i] = demands[i];
+            }
+            finalDemands[demandCount] = Demand();
+            finalDemands[demandCount].name = "placeholder";
+            finalDemands[demandCount].demand = diff;
+
+            finalMatrix = new Node*[supplyCount];
+            for (int i = 0; i < supplyCount; i++) {
+                finalMatrix[i] = new Node[demandCount + 1];
+                for (int j = 0; j < demandCount; j++) {
+                    finalMatrix[i][j] = matrix[i][j];
+                }
+                finalMatrix[i][demandCount] = Node();
+                finalMatrix[i][demandCount].cost = 0;
+                finalMatrix[i][demandCount].value = 0;
+            } 
+        } else {
+            finalDemands = demands;
+            finalSupplies = new Supply[supplyCount + 1];
+            for (int i = 0; i < supplyCount; i++) {
+                finalSupplies[i] = supplies[i];
+            }
+            std::cout << "aaaaaaaaaaaa\n";
+            finalSupplies[supplyCount] = Supply();
+            finalSupplies[supplyCount].name = "placeholder";
+            finalSupplies[supplyCount].capacity = diff;
+
+            std::cout << "bbbbbbbbbbbb\n";
+            finalMatrix = new Node*[supplyCount + 1];
+            for (int i = 0; i < supplyCount; i++) {
+                finalMatrix[i] = new Node[demandCount];
+                for (int j = 0; j < demandCount; j++) {
+                    finalMatrix[i][j] = matrix[i][j];
+                }
+            }
+            std::cout << "cccccccccccc\n";
+            finalMatrix[supplyCount] = new Node[demandCount];
+            for (int j = 0; j < demandCount; j++) {
+                finalMatrix[supplyCount][j] = Node();
+                finalMatrix[supplyCount][j].cost = 0;
+                finalMatrix[supplyCount][j].value = 0;
+            }
+            std::cout << "ddddddddddd\n";
+        }
+    } else {
+        finalSupplies = supplies;
+        finalDemands = demands;
+        finalMatrix = matrix;
+    }
+    
+
     AllInOneBox result = AllInOneBox();
-    result.demands = demands;
-    result.supplies = supplies;
-    result.matrix = matrix;
+    result.demands = finalDemands;
+    result.supplies = finalSupplies;
+    result.matrix = finalMatrix;
     return result;
 }
 
